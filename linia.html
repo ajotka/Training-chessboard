@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chessboard</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="http://www.willangles.com/projects/chessboard/css/chessboard-0.3.0.css">
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="js/chess.min.js"></script>
+  <script type="text/javascript" src="js/chessboard-0.3.0.min.js"></script>
+</head>
+<body>
+<div class="left-menu">
+  <p id="status-wrapper">Status: <span id="result" class="display-none">Brawo !</span></p>
+</div>
+<div class="content">
+  <div id="board"></div>
+</div>
+<div class="right-menu">
+  <p id="status-wrapper">Status: Kliknij na 3 linię</p>  
+</div>
+<script type="text/javascript">
+var board = ChessBoard('board');
+
+$(".row-5277c").click(function(){
+
+  var row = 8 - $(this).index();
+  if ( row == 3) {
+
+    $(this).children("div").addClass('marked');
+    $("#result").addClass('success');
+    $("#result").removeClass('display-none');
+  } else {
+    $(this).children("div").addClass('error');
+  }
+});
+
+</script>
+
+</body>
+</html>

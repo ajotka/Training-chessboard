@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chessboard</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="http://www.willangles.com/projects/chessboard/css/chessboard-0.3.0.css">
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="js/chess.min.js"></script>
+  <script type="text/javascript" src="js/chessboard-0.3.0.min.js"></script>
+</head>
+<body>
+<div class="left-menu">
+  <p id="status-wrapper">Status: <span id="result" class="display-none">Brawo !</span></p>
+</div>
+<div class="content">
+  <div id="board"></div>
+</div>
+<div class="right-menu">
+  <p id="status-wrapper">Status: Kliknij na pole e4</p>  
+</div>
+<script type="text/javascript">
+var board = ChessBoard('board');
+
+$(".square-e4").click(function(){
+  $(".square-e4").addClass('marked');
+  $("#result").addClass('success');
+  $("#result").removeClass('display-none');
+});
+
+</script>
+
+</body>
+</html>

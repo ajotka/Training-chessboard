@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chessboard</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="http://www.willangles.com/projects/chessboard/css/chessboard-0.3.0.css">
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="js/chess.min.js"></script>
+  <script type="text/javascript" src="js/chessboard-0.3.0.min.js"></script>
+</head>
+<body>
+<div class="left-menu">
+  <p id="status-wrapper">Status: <span id="result" class="display-none">Brawo !</span></p>
+</div>
+<div class="content">
+  <div id="board"></div>
+</div>
+<div class="right-menu">
+  <p id="status-wrapper">Status: Wskaż pola, na które może się ruszyć widoczna figura</p>  
+</div>
+
+<script type="text/javascript">
+
+var exercise = {
+  snapbackSpeed: 550,
+  appearSpeed: 1500,
+  draggable: false,
+  pieceTheme: 'http://www.willangles.com/projects/chessboard/img/chesspieces/wikipedia/{piece}.png'
+};
+
+board = new ChessBoard('board', exercise);
+board.position({
+  c4: 'wK'
+});
+$(window).resize(board.resize);
+
+$list = ['b5','b4','b3', 'c5', 'c3', 'd5', 'd4', 'd3'];
+
+$(".square-55d63").click(function(){
+  for ($i = 0; $i <= $list.length; $i++ ) {
+    $custom_class = 'square-' + $list[$i];
+    if ( $(this).hasClass( $custom_class ) ) {
+      $(".square-" +$list[$i]).addClass('marked');
+
+      var numItems = $('.marked').length;
+      if( numItems == $list.length){
+        $("#result").addClass('success');
+        $("#result").removeClass('display-none');
+      }
+      break;
+    }
+  }
+});
+
+</script>
+
+</body>
+</html>

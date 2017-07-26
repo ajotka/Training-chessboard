@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chessboard</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="http://www.willangles.com/projects/chessboard/css/chessboard-0.3.0.css">
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="js/chess.min.js"></script>
+  <script type="text/javascript" src="js/chessboard-0.3.0.min.js"></script>
+</head>
+<body>
+<div class="left-menu">
+  <p id="status-wrapper">Status: <span id="result" class="display-none">Brawo !</span></p>
+</div>
+<div class="content">
+  <div id="board"></div>
+</div>
+<div class="right-menu">
+  <p id="status-wrapper">Status: Wskaż pola, na które może się ruszyć widoczna figura</p>  
+  <p id="pgn-wrapper">Ruchy: </br><span id="pgn"></span></p>
+</div>
+
+<script type="text/javascript">
+
+$my_pieces = ['wK','wK','wK'];
+$my_moves = ['c4','d5','e4','e3']; //c4 is start position
+$i = 0;
+
+var onDrop = function(source, target, piece, newPos, oldPos, orientation) {
+  if(source == target) {
+    return;
+  }
+  // console.log("Source: " + source);
+  // console.log("Target: " + target);
+  // console.log("Piece: " + piece);
+  // console.log("--------------------");
+    if(piece == $my_pieces[$i] && source == $my_moves[$i] && target == $my_moves[$i+1]) {
+      $(".square-" + target).addClass('marked');
+      $i++;
+    } else {
+      $(".square-"+ target).addClass('error');
+    }
+    if ( $('.marked').length == $my_moves.length ) {
+      $("#result").addClass('success');
+      $("#result").removeClass('display-none');
+    }
+};
+var exercise = {
+  snapbackSpeed: 550,
+  appearSpeed: 1500,
+  draggable: true,
+  onDrop: onDrop,
+  pieceTheme: 'http://www.willangles.com/projects/chessboard/img/chesspieces/wikipedia/{piece}.png'
+};
+
+board = new ChessBoard('board', exercise);
+board.position({
+  c4: 'wK',
+  d5: 'bB',
+  e4: 'bP',
+  e3: 'bQ'
+});
+$(window).resize(board.resize);
+
+
+</script>
+
+</body>
+</html>
